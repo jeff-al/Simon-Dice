@@ -7,20 +7,35 @@ const NARANJA = document.getElementById('naranja')
 const VERDE = document.getElementById('verde')
 
 
-
 class Juego {
     constructor(){
         this.inicializar()
-        alert('Se ha iniciado el juego')      
+        this.generarSecuencia()
+       // alert('Se ha iniciado el juego')      
     }
 
     inicializar(){
         BTN_EMPEZAR.classList.add('hide') //Lo que hacemos es agregar la clase hide al boton, ocultandonos el boton de la patalla
+        this.nivel = 1
+        this.colores = {
+            CELESTE,
+            VIOLETA,
+            NARANJA,
+            VERDE
+        }
+
+    }
+
+    generarSecuencia(){
+        this.secuencia = new Array(10).fill(0).map(numero =>  Math.floor(Math.random() * 4)) //Se usa para generar un arreglo de tamano 10 
+        //fill(0)  llena todo el arreglo con 0s
+        //map(...) solo funciona con arrays inicializados (con elementos definidos) 
+        //Math.floor() redondea hacia abajo
     }
 
 } 
 
 
 function empezarJuego(){
-    var juego = new Juego()
+    window.juego = new Juego() //Se usa para ver variables que estan declaradas dentro de funciones. (Para depuracion)
 }
