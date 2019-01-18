@@ -10,16 +10,17 @@ const ULTIMO_NIVEL = 10
 
 class Juego {
     constructor(){
+        this.inicializar = this.inicializar.bind(this)
         this.inicializar()
         this.generarSecuencia()
         setTimeout(this.siguienteNivel, 700)
-       // alert('Se ha iniciado el juego')      
+        //swal('Se ha iniciado el juego') //Usando la libreria de sweet alert      
     }
 
     inicializar(){
-        BTN_EMPEZAR.classList.add('hide') //Lo que hacemos es agregar la clase hide al boton, ocultandonos el boton de la patalla
         this.elegirColor = this.elegirColor.bind(this)  //Esto se hace para que el navegador no cambie el contexto del programa
         this.siguienteNivel = this.siguienteNivel.bind(this) //Es decir, no pasa el this del objeto al this de window
+        this.toggleBtnEmpezar() //Muestra o desaparece el boton segun se quiera
         this.nivel = 1
         this.colores = {
             CELESTE,
@@ -27,7 +28,14 @@ class Juego {
             NARANJA,
             VERDE
         }
+    }
 
+    toggleBtnEmpezar(){
+        if(BTN_EMPEZAR.classList.contains('hide')){
+            BTN_EMPEZAR.classList.remove('hide')
+        }else{
+            BTN_EMPEZAR.classList.add('hide')
+        }
     }
 
     generarSecuencia(){
@@ -59,18 +67,18 @@ class Juego {
         if(numeroColor === this.secuencia[this.subNivel]){ //Preguntamos si el color escogido conincide con el de la secuencia
             this.subNivel++;                            // Si lo es aumentamos el subnivel
             if(this.subNivel === this.nivel){           //Si el subnivel es igual al nivel actual
-                this.nivel++                            //Aumentamos el nivel
                 if(this.nivel === ULTIMO_NIVEL){        //Si es el ultimo nivel, gana
-                    //Gano
+                    this.ganoElJuego()
                 }
-                else{                                   //Si no es el ultimo nivel, se empieza la secuencia con 1 nivel mas 
+                else{                                   //Si no es el ultimo nivel, se empieza la secuencia con 1 nivel mas
+                    this.nivel++            
                     this.quitarEventosClick()           //Se quitan estos eventos para que no haya problemas.
                     setTimeout(this.siguienteNivel, 2000)
                 }
                 this.iluminarColor(nombreColor)
             }
         }else{
-            //Perdio
+            this.perdioElJuego()
         }
     }
 
@@ -122,6 +130,18 @@ class Juego {
         this.colores[color].classList.remove('light')
     }
 
+    ganoElJuego(){
+        swal('Simon Dice', 'Felicidades, ganaste el juego!', 'success')
+        .then(this.inicializar)
+    }
+
+    perdioElJuego(){
+        swal('Simon Dice', 'Perdiste!', 'error')
+        .then(() => {
+            this.quitarEventosClick()
+            this.inicializar()
+        })
+    }
 } 
 
 
