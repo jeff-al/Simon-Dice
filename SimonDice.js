@@ -11,6 +11,7 @@ class Juego {
     constructor(){
         this.inicializar()
         this.generarSecuencia()
+        this.siguienteNivel()
        // alert('Se ha iniciado el juego')      
     }
 
@@ -31,6 +32,40 @@ class Juego {
         //fill(0)  llena todo el arreglo con 0s
         //map(...) solo funciona con arrays inicializados (con elementos definidos) 
         //Math.floor() redondea hacia abajo
+    }
+
+    siguienteNivel(){
+        this.ilimunarSecuencia()
+    }
+
+    transformarNumeroAColor(numero){ //Pasa un numero a un color (0-3)
+        switch(numero){//Si se usa return no es necesario porner los breaks
+            case 0:
+                return 'CELESTE'
+            case 1:
+                return 'VIOLETA'
+            case 2:
+                return 'NARANJA'
+            case 3:     
+                return 'VERDE'
+        }
+    }
+
+    ilimunarSecuencia(){
+        for(let i = 0; i < this.nivel; i++){//Se usa let porque con var solo sale un color(ya que el programa avanza mas rapido que la funcion asincrona)
+            const color = this.transformarNumeroAColor(this.secuencia[i]) //Se transforma los numeros de la secuencia a colores
+            setTimeout(() => this.iluminarColor(color), 1000 * i)       
+        }
+    }
+
+    iluminarColor(color){
+        this.colores[color].classList.add('light')
+        setTimeout(() => this.apagarColor(color), 350)
+    }
+
+    apagarColor(color){
+        this.colores[color].classList.remove('light')
+
     }
 
 } 
