@@ -17,6 +17,7 @@ class Juego {
 
     inicializar(){
         BTN_EMPEZAR.classList.add('hide') //Lo que hacemos es agregar la clase hide al boton, ocultandonos el boton de la patalla
+        this.elegirColor = this.elegirColor.bind(this)
         this.nivel = 1
         this.colores = {
             CELESTE,
@@ -32,6 +33,19 @@ class Juego {
         //fill(0)  llena todo el arreglo con 0s
         //map(...) solo funciona con arrays inicializados (con elementos definidos) 
         //Math.floor() redondea hacia abajo
+        this.agregarEventosClick()
+    }
+
+    agregarEventosClick(){
+        //Se agregan los eventos de click para cada boton de color. (tipo ,  funcionALlamar)
+        this.colores.CELESTE.addEventListener('click', this.elegirColor)
+        this.colores.VIOLETA.addEventListener('click', this.elegirColor)
+        this.colores.NARANJA.addEventListener('click', this.elegirColor)
+        this.colores.VERDE.addEventListener('click', this.elegirColor)
+    }
+
+    elegirColor(ev){
+        console.log(this.id)
     }
 
     siguienteNivel(){
