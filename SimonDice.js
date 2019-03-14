@@ -84,8 +84,13 @@ class Juego {
 
     siguienteNivel(){
         this.subNivel = 0
+        this.cambiarNivel()
         this.ilimunarSecuencia()
         this.agregarEventosClick() //Se hace aqui para poder quitarlos depues de que el usuario pase de nivel.
+    }
+
+    cambiarNivel(){
+        document.getElementById('numNivel').innerHTML = this.nivel
     }
 
     transformarNumeroAColor(numero){ //Pasa un numero a un color (0-3)
@@ -141,6 +146,7 @@ class Juego {
             this.quitarEventosClick()
             this.inicializar()
         })
+        document.getElementById('numNivel').innerHTML = ''
     }
 } 
 

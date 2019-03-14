@@ -75,12 +75,18 @@
         margin-top: inherit;
         width: 300px;
         height: 100px;
-        border: red solid 5px;
+        border-radius: 30%;
+        border:gray solid 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </head>
   <body>
-    <div class="nivel"></div>
+    <div class="nivel">
+      <label id="nivel" style="color: white; font-size: x-large;">Nivel: <strong id="numNivel"></strong> </label>
+    </div>
     <div class="gameboard">
       <div id="celeste" class="color celeste left" data-color="celeste"></div>
       <div id="violeta" class="color violeta right" data-color="violeta"></div>
